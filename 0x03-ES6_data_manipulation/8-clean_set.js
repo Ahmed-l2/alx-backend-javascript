@@ -2,13 +2,18 @@ export default function cleanSet(set, startString) {
   if (!startString || typeof startString !== 'string') {
     return '';
   }
-  const result = [...set]
-    // First we filter elements starting with startString
-    .filter((value) => value.startsWith(startString))
-    // Then we map to substring after startString
-    .map((value) => value.substring(startString.length))
-    // And finally we join elements with '-'
-    .join('-');
+
+  let result = '';
+
+  [...set].forEach(value => {
+    if (value.startsWith(startString)) {
+      result += value.slice(startString.length) + '-';
+    }
+  });
+
+  if (result.length > 0) {
+    result = result.slice(0, -1);
+  }
 
   return result;
 }
