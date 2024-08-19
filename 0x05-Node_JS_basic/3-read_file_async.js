@@ -1,6 +1,5 @@
 #!/usr/bin/node
 const fs = require('fs');
-const { resolve } = require('path');
 
 function countStudents(path) {
   return new Promise((resolve, reject) => {
