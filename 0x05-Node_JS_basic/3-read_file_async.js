@@ -1,12 +1,12 @@
 #!/usr/bin/node
 const fs = require('fs');
+const { resolve } = require('path');
 
 function countStudents(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
-      if (err) {
-        throw new Error('Cannot load the database');
-      }
+      if (err) return reject(Error('Cannot load the database'));
+
       const lines = data.split('\n').slice(1, -1);
       console.log(`Number of students: ${lines.length}`);
 
