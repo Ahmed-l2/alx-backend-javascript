@@ -16,12 +16,13 @@ function countStudents(path) {
   const swe = [];
 
   lines.forEach((line) => {
-    const [name, field] = line.split(',');
-    if (field === 'CS') {
-      cs.push(name);
+    if (line.includes('CS')) {
+      const student = line.split(',')[0];
+      cs.push(student);
     }
-    if (field === 'SWE') {
-      swe.push(name);
+    if (line.includes('SWE')) {
+      const student = line.split(',')[0];
+      swe.push(student);
     }
   });
 
