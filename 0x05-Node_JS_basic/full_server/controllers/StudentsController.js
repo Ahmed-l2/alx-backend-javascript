@@ -2,7 +2,7 @@ import readDatabase from '../utils';
 
 const path = process.argv[2];
 class StudentsController {
-  static getAllStudents(req, res) {
+  static async getAllStudents(req, res) {
     readDatabase(path).then((studentData) => {
       const data = ['This is the list of our students'];
       data.push(`Number of students in CS: ${studentData.CS.length}. List: ${studentData.CS.join(', ')}`);
@@ -11,7 +11,7 @@ class StudentsController {
     }).catch(() => res.status(500).send('Cannot load the database'));
   }
 
-  static getAllStudentsByMajor(req, res) {
+  static async getAllStudentsByMajor(req, res) {
     const major = req.params.major.toUpperCase();
     if (major === 'CS' || major === 'SWE') {
       readDatabase(path).then((data) => {
