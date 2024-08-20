@@ -1,14 +1,14 @@
 #!/usr/bin/node
 const fs = require('fs');
-const { resolve } = require('path');
 
 function countStudents(path) {
-  return new Promise((resolve, reject) => {
+  const promise = new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
-      if (err) return reject(Error('Cannot load the database'));
+      if (err) {
+        reject(Error('Cannot load the database'));
+      }
 
       const lines = data.split('\n').slice(1, -1);
-      console.log(`Number of students: ${lines.length}`);
 
       const cs = [];
       const swe = [];
@@ -24,11 +24,13 @@ function countStudents(path) {
         }
       });
 
+      console.log(`Number of students: ${lines.length}`);
       console.log(`Number of students in CS: ${cs.length}. List: ${cs.join(', ')}`);
       console.log(`Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
-      return resolve();
+      resolve(`Number of students: ${lines.length}\nNumber of students in CS: ${cs.length}. List: ${cs.join(', ')}\nNumber of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
     });
   });
+  return promise;
 }
 
 module.exports = countStudents;
