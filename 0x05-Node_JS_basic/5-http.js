@@ -7,19 +7,18 @@ const app = http.createServer(async (req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     res.statusCode = 200;
     res.end('Hello Holberton School!');
-  } else if (req.method === 'GET' && req.url === '/students') {
+  }
+
+  if (req.method === 'GET' && req.url === '/students') {
     res.statusCode = 200;
-    res.write('This is the list of our students\n');
+    const path = process.argv[2];
     try {
-      const studentsData = await countStudents('database.csv');
-      res.end(studentsData);
+      const studentsData = await countStudents(path);
+      res.end(`This is the list of our students\n${studentsData}`);
     } catch (err) {
-      res.statusCode = 500;
+      res.statusCode = 404;
       res.end('Error reading data');
     }
-  } else {
-    res.statusCode = 404;
-    res.end('Not Found');
   }
 });
 
