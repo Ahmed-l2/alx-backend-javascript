@@ -1,8 +1,8 @@
 import readDatabase from '../utils';
 
-const path = process.argv[2];
 class StudentsController {
   static async getAllStudents(req, res) {
+    const path = process.argv[2];
     readDatabase(path).then((studentData) => {
       const data = ['This is the list of our students'];
       data.push(`Number of students in CS: ${studentData.CS.length}. List: ${studentData.CS.join(', ')}`);
@@ -12,6 +12,7 @@ class StudentsController {
   }
 
   static async getAllStudentsByMajor(req, res) {
+    const path = process.argv[2];
     const major = req.params.major.toUpperCase();
     if (major === 'CS' || major === 'SWE') {
       readDatabase(path).then((data) => {

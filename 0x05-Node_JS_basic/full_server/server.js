@@ -1,9 +1,9 @@
 import express from 'express';
-import routes from './routes/index.js';
+import router from './routes/index.js';
 
 const app = express();
 
-app.use('/', routes);
+app.use('/', router);
 app.listen(1245);
 
 export default app;

@@ -4,7 +4,8 @@ function readDatabase(path) {
   return new Promise((resolve, reject) => {
     fs.readFile(path, 'utf8', (err, data) => {
       if (err) {
-        reject(new Error('Cannot load the database'));
+        return reject(new Error('Cannot load the database'));
+
       }
 
       const lines = data.split('\n').filter((line) => line.trim() !== '');
@@ -21,7 +22,6 @@ function readDatabase(path) {
           swe.push(name);
         }
       });
-
       resolve({ CS: cs, SWE: swe });
     });
   });
